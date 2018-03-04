@@ -1,5 +1,7 @@
 # Run sandboxed
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kristianmandrup/run-sandboxed.svg)](https://greenkeeper.io/)
+
  Run sandboxed code and return result in `ctx` object. By default only [powerdash](https://www.npmjs.com/package/powerdash) functions are made available inside the sandbox via `_`.
 
 ## Usage
