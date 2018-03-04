@@ -1,6 +1,6 @@
 {
   "name": "run-sandboxed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Run sandboxed code and return result",
   "main": "dist/src",
   "scripts": {
