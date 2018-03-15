@@ -4,10 +4,16 @@
 
 ## Usage
 
-Create a sandbox file such as `treedef.sjs`
+Create a sandbox file such as `simple.sjs`
 
 ```js
-ctx.treeDef = {
+result = 42
+```
+
+To return an object, pass into variable `result`
+
+```js
+result = {
   opts: {
     type: 'js',
     indent: 4
@@ -27,7 +33,19 @@ const ctx = runSandboxedCodeAt(filePath)
 
 ### warn
 
-Pass a `warn` function as an option to signal a warning and return an empty object `{}` if code can not be read (or run). If a `warn` function is not passed, the error is simply thrown.
+Pass a custom `warn` function to signal a warning and return a default value if code can not be read (or run). If a `warn` function is not passed, the error is handled normally and an Error might well be thrown.
+
+### defaultValue
+
+Custom default value to return in case of error. If not set, will return empty object `{}`.
+
+### log
+
+Pass a custom `log` function to log messages
+
+### error
+
+Pass a custom `error` function to handle (and throw) errors
 
 ### VM sandbox options
 
@@ -38,7 +56,6 @@ You can pass custom VM sandbox options to override the defaults:
   timeout: 1000,
   // what to make available inside
   sandbox: {
-    ctx,
     _ // powerdash functions
   }
 }

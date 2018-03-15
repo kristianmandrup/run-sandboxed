@@ -1,6 +1,6 @@
 result = {
   opts: {
     type: 'js',
-    indent: 4
+    name: _.humanize('adam_snow')
   }
 }

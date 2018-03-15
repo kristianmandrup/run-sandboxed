@@ -1,14 +1,15 @@
 import * as path from 'path'
 import {
-  runSandboxedCodeAt
+  sandboxed
 } from '../src'
 
-describe('transformTree', () => {
-  it('transforms treeDef to an object', () => {
-    const filePath = path.join(__dirname, 'treedef.sjs')
-    const ctx = runSandboxedCodeAt(filePath)
-    expect(typeof ctx.treeDef).toBe('object')
-    expect(ctx.treeDef.opts.type).toBe('js')
+describe('sanboxed', () => {
+  describe('runs sandboxed code from string', () => {
+
+    it.only('code: 123 returns number 123', () => {
+      const result = sandboxed({ code: `123` })
+      expect(typeof result).toBe('number')
+      expect(result).toEqual(123)
+    })
   })
 })
-
