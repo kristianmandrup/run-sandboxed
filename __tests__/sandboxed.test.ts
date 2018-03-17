@@ -1,4 +1,3 @@
-import * as path from 'path'
 import {
   sandboxed
 } from '../src'
@@ -6,7 +5,7 @@ import {
 describe('sanboxed', () => {
   describe('runs sandboxed code from string', () => {
 
-    it.only('code: 123 returns number 123', () => {
+    it('code: 123 returns number 123', () => {
       const result = sandboxed({ code: `123` })
       expect(typeof result).toBe('number')
       expect(result).toEqual(123)

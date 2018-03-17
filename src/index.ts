@@ -5,10 +5,20 @@ import * as _ from 'powerdash'
 import * as fs from 'fs'
 import * as deepmerge from 'deepmerge'
 
+function error(msg: string, data?: any) {
+  data ? console.error(msg, data) : console.error(msg)
+  throw new Error(msg)
+}
+const defaults = {
+  error,
+  log() { }
+};
+
 const createVm = (options: any) => {
-  const {
+  let {
     log
   } = options
+  log = log || defaults.log
 
   const vmOpts = deepmerge({
     timeout: 1000,
@@ -17,7 +27,7 @@ const createVm = (options: any) => {
       _ // powerdash functions
     }
   }, options)
-  log && log({
+  log({
     vmOpts
   })
   return {
@@ -45,15 +55,6 @@ export function runSandboxedCodeAt(filePath: string, options: any = {}): any {
   }
 }
 
-function error(msg: string, data?: any) {
-  data ? console.error(msg, data) : console.error(msg)
-  throw new Error(msg)
-}
-
-const defaults = {
-  error
-}
-
 export function sandboxed(config: any = {}) {
   let {
     code,
@@ -64,6 +65,7 @@ export function sandboxed(config: any = {}) {
     error
   } = options
   error = error || defaults.error
+  log = log || defaults.log
 
   const vmDef = createVm(options)
   if (!code) {
@@ -75,7 +77,7 @@ export function sandboxed(config: any = {}) {
   try {
     // var script = new VMScript("Math.random()").compile();
     const result = vmDef.vm.run(code)
-    log && log({ result, code })
+    log({ result, code })
     return result
   } catch (err) {
     error('Failed to run script', err);
